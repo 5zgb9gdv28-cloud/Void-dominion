@@ -88,7 +88,7 @@ input[type=number]{width:80px}
 
 <div id="right"><div class="panel"><div class="pt">15 / 16 Planeten</div><div class="planetList" id="planets"></div></div><div class="panel"><div class="pt">Missionen</div><div style="padding:8px">Expeditionen: <b id="rightExpos">0</b><br><br>Slots: <b>6 / 6</b><br><br><button onclick="go('expedition')">Expedition</button></div></div></div>
 </div>
-<div id="footer">Update #1.1 · 2026 · Void Dominion · Einstellungen · Hilfe · Forum · Regeln · Datenschutz · TESTSERVER</div>
+<div id="footer">Update #1.2 · 2026 · CLASSIC TEST BUILD · Void Dominion · Einstellungen · Hilfe · Forum · Regeln · Datenschutz · TESTSERVER</div>
 </div>
 
 <div id="modal"><div class="modalbox"><h3 id="mtitle">Angriff</h3><div class="modalbody" id="mbody"></div><div class="modalfoot"><button onclick="closeModal()">Abbrechen</button> <button id="modalAction">Bestätigen</button></div></div></div>
@@ -141,5 +141,18 @@ function updateQueues(){let now=Date.now();$('buildingQueue').innerHTML=D.buildi
 function tick(){let now=Date.now(),dt=(now-last)/3600000;last=now;D.m+=12400000*dt;D.c+=7200000*dt;D.d+=3100000*dt;if(D.building&&D.building<=now){D.building=0;D.points+=100;toast('Gebäude fertig.')}if(D.research&&D.research<=now){D.research=0;D.points+=250;toast('Forschung fertig.')}if(D.shipQueue&&D.shipQueue<=now)D.shipQueue=0;updateQueues();top();save();$('time').textContent=new Date().toLocaleTimeString('de-DE');}
 load();renderPlanets();top();expoRender();battleTargets();resources();updateQueues();tick();setInterval(tick,1000);
 </script>
+
+<script>
+/* Void Dominion v0.7 interaction bridge */
+window.addEventListener('DOMContentLoaded', function(){
+  document.querySelectorAll('.menu a[data-page]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      if (typeof go === 'function') go(a.dataset.page);
+    });
+  });
+});
+</script>
+
 </body>
 </html>
