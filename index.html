@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Void Dominion – Prototype</title>
+<style>
+body{margin:0;background:#07101b;color:#e8f1ff;font-family:Arial,sans-serif}
+header{padding:16px;background:#0d1b2a;border-bottom:1px solid #29415a}
+h1{margin:0;font-size:22px}.sub{opacity:.7;font-size:13px}
+main{max-width:900px;margin:auto;padding:14px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.card{background:#0d1b2a;border:1px solid #29415a;border-radius:12px;padding:14px}
+button{background:#24577a;color:white;border:0;border-radius:8px;padding:10px;margin:4px 0;font-weight:bold}
+button:disabled{opacity:.45}
+.stat{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #172a3b}
+.bar{height:8px;background:#16283a;border-radius:5px;overflow:hidden}.fill{height:100%;background:#55aee8}
+.log{max-height:240px;overflow:auto;font-size:13px}.good{color:#75e69a}.warn{color:#ffd66b}
+@media(max-width:650px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+<h1>🚀 VOID DOMINION</h1>
+<div class="sub">Eigenständiger Browsergame-Prototyp – Version 0.1</div>
+</header>
+<main>
+<div class="card">
+  <b>🪐 Planet „Asterion“</b>
+  <div id="resources"></div>
+</div>
+
+<div class="grid">
+<div class="card">
+<h3>⛏️ Gebäude</h3>
+<div id="buildings"></div>
+</div>
+
+<div class="card">
+<h3>🚀 Expedition</h3>
+<p>Eine Expedition dauert <b>60 Sekunden</b> im Prototyp.</p>
+<button id="expoBtn">Expedition starten</button>
+<div id="expoStatus"></div>
+</div>
+</div>
+
+<div class="grid">
+<div class="card">
+<h3>🔬 Forschung</h3>
+<div id="research"></div>
+</div>
+
+<div class="card">
+<h3>📊 Statistik</h3>
+<div id="stats"></div>
+</div>
+</div>
+
+<div class="card">
+<h3>📜 Ereignisse</h3>
+<div id="log" class="log"></div>
+</div>
+</main>
+
+<script>
+const S={
+ m:5000,c:3000,d:1500,e:120,
+ mines:{metal:1,crystal:1,deut:1,solar:2},
+ research:0, expos:0, found:{m:0,c:0,d:0,dm:0,ships:0}, active:null, log:[]
+};
+const cost={
+ metal:{m:60,c:15}, crystal:{m:48,c:24}, deut:{m:225,c:75},
+ solar:{m:75,c:30}
+};
+const prod={
+ metal:l=>30*Math.pow(1.5,l),
+ crystal:l=>20*Math.pow(1.6,l),
+ deut:l=>10*Math.pow(1.5,l)
+};
+function fmt(x){return Math.floor(x).toLocaleString('de-DE')}
+function addLog(t){S.log.unshift(new Date().toLocaleTimeString()+' – '+t);S.log=S.log.slice(0,50)}
+function tick(){
+  S.m+=prod(S.mines.metal)/3600; S.c+=prod(S.mines.crystal)/3600; S.d+=prod(S.mines.deut)/3600;
+  render();
+}
+function building(name,label){
+ const l=S.mines[name], co=cost[name], mult=Math.pow(1.5,l);
+ const m=co.m*mult,c=co.c*mult;
+ const ok=S.m>=m&&S.c>=c;
+ return `<div class="stat"><span>${label} ${l}</span><span>${fmt(m)} M / ${fmt(c)} K</span></div>
+ <button onclick="upgrade('${name}')" ${ok?'':'disabled'}>Stufe ${l+1}</button>`;
+}
+window.upgrade=function(name){
+ const l=S.mines[name], mult=Math.pow(1.5,l), co=cost[name];
+ const m=co.m*mult,c=co.c*mult;
+ if(S.m<m||S.c<c)return;
+ S.m-=m;S.c-=c;S.mines[name]++;
+ addLog('🏗️ '+name+' auf Stufe '+S.mines[name]+' gebaut.');
+ render();
+}
+function startExpo(){
+ if(S.active)return;
+ S.active=Date.now()+60000; S.expos++;
+ addLog('🚀 Expedition gestartet.');
+ render();
+ setTimeout(finishExpo,60000);
+}
+function finishExpo(){
+ S.active=null;
+ const r=Math.random();
+ if(r<.08){S.found.dm+=500+Math.floor(Math.random()*4500);addLog('🌑 Dunkle Materie gefunden.');}
+ else if(r<.38){let x=Math.floor(500+Math.random()*4500);S.m+=x;S.found.m+=x;addLog('🪨 Kleine Metalllagerstätte gefunden: '+fmt(x));}
+ else if(r<.62){let x=Math.floor(400+Math.random()*3500);S.c+=x;S.found.c+=x;addLog('💎 Kristallfund: '+fmt(x));}
+ else if(r<.82){let x=Math.floor(250+Math.random()*2500);S.d+=x;S.found.d+=x;addLog('⛽ Deuteriumfund: '+fmt(x));}
+ else if(r<.94){let x=1+Math.floor(Math.random()*25);S.found.ships+=x;addLog('🚀 Schiffswrack geborgen: '+x+' Schiffe.');}
+ else addLog('🌌 Die Expedition findet nichts.');
+ render();
+}
+function render(){
+ document.getElementById('resources').innerHTML=
+ `<div class="stat"><span>🪨 Metall</span><b>${fmt(S.m)}</b></div>
+  <div class="stat"><span>💎 Kristall</span><b>${fmt(S.c)}</b></div>
+  <div class="stat"><span>⛽ Deuterium</span><b>${fmt(S.d)}</b></div>
+  <div class="stat"><span>⚡ Energie</span><b>${fmt(S.e)}</b></div>`;
+ document.getElementById('buildings').innerHTML=
+ building('metal','🪨 Metallmine')+building('crystal','💎 Kristallmine')+
+ building('deut','⛽ Deuteriumsynthetisierer')+building('solar','☀️ Solarkraftwerk');
+ document.getElementById('research').innerHTML=
+ `<div class="stat"><span>Astrophysik</span><b>Stufe ${S.research}</b></div>
+ <button onclick="research()">Astrophysik +1</button>`;
+ document.getElementById('stats').innerHTML=
+ `<div class="stat"><span>🚀 Expos</span><b>${S.expos}</b></div>
+ <div class="stat"><span>🪨 Expo-Metall</span><b>${fmt(S.found.m)}</b></div>
+ <div class="stat"><span>💎 Expo-Kristall</span><b>${fmt(S.found.c)}</b></div>
+ <div class="stat"><span>⛽ Expo-Deut</span><b>${fmt(S.found.d)}</b></div>
+ <div class="stat"><span>🌑 Expo-DM</span><b>${fmt(S.found.dm)}</b></div>
+ <div class="stat"><span>🚀 Expo-Schiffe</span><b>${fmt(S.found.ships)}</b></div>`;
+ document.getElementById('expoBtn').disabled=!!S.active;
+ document.getElementById('expoStatus').innerHTML=S.active?'⏳ Expedition läuft…':'Bereit';
+ document.getElementById('log').innerHTML=S.log.map(x=>'<div>'+x+'</div>').join('');
+}
+window.research=function(){
+ const m=1000*Math.pow(2,S.research),c=1500*Math.pow(2,S.research),d=500*Math.pow(2,S.research);
+ if(S.m<m||S.c<c||S.d<d){addLog('❌ Nicht genug Ressourcen für Forschung.');return}
+ S.m-=m;S.c-=c;S.d-=d;S.research++;addLog('🔬 Astrophysik ist jetzt Stufe '+S.research+'.');render();
+}
+setInterval(tick,1000);render();
+</script>
+</body>
+</html>
