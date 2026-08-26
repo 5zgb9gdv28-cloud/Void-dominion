@@ -3,96 +3,147 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Void Dominion – Classic</title>
+<title>Void Dominion – Classic Server</title>
 <style>
-html,body{margin:0;min-height:100%;background:#000;color:#c7d1d8;font-family:Arial,Helvetica,sans-serif;font-size:12px}
-body{background:
-radial-gradient(circle at 50% 25%,rgba(35,63,82,.32),transparent 45%),
-linear-gradient(#07111a,#020507 70%);overflow-x:hidden}
-a{color:#9dbfd4;text-decoration:none}
-.top{height:34px;background:linear-gradient(#18262f,#071016);border-bottom:1px solid #334957;box-shadow:0 1px 4px #000;display:flex;align-items:center;padding:0 10px;gap:18px;color:#aab9c2}
-.top .player{color:#e4edf2;font-weight:bold}.topnav{display:flex;gap:18px;flex:1}.topnav span{cursor:pointer}.clock{white-space:nowrap}
-.shell{width:min(1180px,100%);margin:8px auto;display:grid;grid-template-columns:185px minmax(0,1fr) 190px;gap:7px}
-.left,.right,.center{min-width:0}
-.logo{height:92px;background:linear-gradient(135deg,#0a1720,#02070b);border:1px solid #273d4b;display:flex;align-items:center;justify-content:center;margin-bottom:6px;box-shadow:inset 0 0 25px #000}
-.logo b{font-size:22px;letter-spacing:5px;color:#d6e4eb;text-shadow:0 0 8px #5f91aa}.logo small{display:block;text-align:center;font-size:9px;letter-spacing:3px;color:#7194a7}
-.menu{border:1px solid #263c49;background:linear-gradient(#13232d,#071016);margin-bottom:3px;box-shadow:inset 0 1px #243844}
-.menu div{height:27px;display:flex;align-items:center;padding:0 8px;border-bottom:1px solid #162933;color:#b9c7cf}
-.menu div:last-child{border-bottom:0}.menu div:hover,.menu .sel{background:linear-gradient(#284758,#122b39);color:#fff}
-.menu i{width:24px;color:#7fa4b8;font-style:normal;text-align:center;font-size:14px}
-.smallbox{border:1px solid #263c49;background:#071017;margin-top:6px}.smallbox h4{margin:0;padding:6px 8px;background:linear-gradient(#182b36,#0b151b);color:#d2dce2;border-bottom:1px solid #263c49}.smallbox p{margin:7px 8px;color:#879aa6}
-.resourcebar{height:62px;border:1px solid #2b4350;background:linear-gradient(#111e27,#060d12);display:grid;grid-template-columns:repeat(4,1fr);margin-bottom:7px}
-.resource{display:flex;align-items:center;gap:7px;padding:5px 9px;border-right:1px solid #1e323e}.resource:last-child{border:0}.ico{width:28px;height:28px;border-radius:4px;background:radial-gradient(circle,#cbd8df,#4e6774 55%,#14232b);box-shadow:0 0 8px #6b91a055}.resource b{display:block;color:#e8eef2;font-size:13px}.resource small{color:#7195a7}
-.events{border:1px solid #273e4b;background:#060d12;margin-bottom:7px}
-.event{display:grid;grid-template-columns:25% 45% 30%;padding:5px 8px;border-bottom:1px solid #172b36}.event:last-child{border:0}.event .red{color:#d78383}.event .green{color:#82b49a}
-.panel{border:1px solid #2b4350;background:rgba(5,12,17,.93);box-shadow:0 2px 8px #000;margin-bottom:7px}
-.paneltitle{padding:7px 10px;background:linear-gradient(#192c38,#0a151c);border-bottom:1px solid #2b4350;color:#dbe5ea;font-size:14px;font-weight:bold}
-.overview{min-height:410px;position:relative;overflow:hidden;background:
-radial-gradient(circle at 50% 44%,rgba(78,116,133,.25),transparent 30%),
-radial-gradient(circle at 50% 55%,#0b1922 0,#050b10 48%,#020506 75%)}
-.stars{position:absolute;inset:0;background-image:radial-gradient(#7893a0 1px,transparent 1px),radial-gradient(#fff 1px,transparent 1px);background-size:71px 61px,113px 97px;opacity:.2}
-.planet{position:absolute;width:245px;height:245px;left:50%;top:42px;transform:translateX(-50%);border-radius:50%;background:
-radial-gradient(circle at 34% 28%,#b6d3c8 0 5%,#537f78 19%,#183a42 43%,#07151c 69%,#020508 75%);
-box-shadow:-25px 20px 45px #000,0 0 35px #6aa0b355,inset -25px -10px 30px #000}
-.infoleft,.inforight{position:absolute;top:18px;width:205px;background:rgba(4,10,14,.82);border:1px solid #28424f}
-.infoleft{left:12px}.inforight{right:12px}.infotitle{padding:7px;color:#dbe7ed;background:#0e1d26;border-bottom:1px solid #27404d}.line{display:flex;justify-content:space-between;padding:6px 8px;border-bottom:1px solid #142731}.line:last-child{border:0}.heroName{position:absolute;left:0;right:0;bottom:18px;text-align:center;color:#dce9ef;text-shadow:0 2px 5px #000}.heroName b{font-size:17px}
-.bottomgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}.queue{min-height:145px}.queue .body{padding:9px}.queueItem{display:flex;gap:8px;border-bottom:1px solid #1a303b;padding:6px 0}.thumb{width:55px;height:45px;border:1px solid #304a58;background:radial-gradient(circle,#698897,#172a35 60%,#060b0f)}.queueItem b{display:block;color:#dce7ec}.muted{color:#7d919c}.right .planetlist{padding:4px}.planetrow{display:grid;grid-template-columns:42px 1fr 22px;align-items:center;gap:7px;padding:7px 5px;border-bottom:1px solid #1a303b}.planetrow.active{background:linear-gradient(#1b3544,#0c1d27)}.pimg{width:36px;height:36px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#c4d9d2,#547b74 35%,#10242b 72%);border:1px solid #466271}.pimg.moon{background:radial-gradient(circle at 35% 30%,#d4d4cf,#666863 45%,#171a1a 75%)}.coords{color:#8fa8b6;font-size:11px}.num{color:#c7d4db;text-align:center}
-.footer{color:#637984;text-align:center;padding:12px}
-@media(max-width:850px){.shell{grid-template-columns:52px minmax(0,1fr);margin:4px}.right{display:none}.logo{height:52px}.logo b{font-size:0}.logo b:after{content:"VD";font-size:20px}.logo small{display:none}.menu div{justify-content:center;padding:0}.menu div span{display:none}.menu i{width:auto}.smallbox{display:none}.top{gap:8px}.topnav{display:none}.resourcebar{grid-template-columns:repeat(4,1fr);height:58px}.resource{padding:4px}.resource b{font-size:10px}.resource small{display:none}.ico{width:23px;height:23px}.event{grid-template-columns:1fr}.event span:nth-child(n+2){display:none}.infoleft,.inforight{display:none}.planet{width:205px;height:205px}.overview{min-height:340px}.bottomgrid{grid-template-columns:1fr}.shell .center{min-width:0}}
+*{box-sizing:border-box}html,body{margin:0;background:#020609;color:#c9d5dc;font:12px Arial,Helvetica,sans-serif}
+body{background:radial-gradient(circle at 50% 25%,#1a3445 0,#07131c 35%,#020507 78%);min-height:100vh}
+button,input,select{font:12px Arial}button{cursor:pointer;color:#dbe8ef;background:linear-gradient(#294653,#10212b);border:1px solid #466372;border-radius:3px;padding:6px 10px}button:hover{background:linear-gradient(#3a6274,#17313e)}button:disabled{opacity:.45;cursor:not-allowed}
+.top{height:35px;background:linear-gradient(#172832,#071016);border-bottom:1px solid #38505d;display:flex;align-items:center;padding:0 10px;gap:14px}.top b{color:#fff}.topnav{display:flex;gap:14px;flex:1}.topnav span{cursor:pointer}.clock{white-space:nowrap}
+.shell{width:min(1220px,100%);margin:7px auto;display:grid;grid-template-columns:180px minmax(0,1fr) 195px;gap:7px}
+.logo{height:76px;border:1px solid #2b424f;background:linear-gradient(135deg,#0d1d27,#020608);display:grid;place-items:center;margin-bottom:6px;box-shadow:inset 0 0 25px #000}.logo b{font-size:21px;letter-spacing:4px;color:#dbe7ed}.logo small{display:block;text-align:center;letter-spacing:3px;color:#6d91a2}
+.menu{border:1px solid #263d49;background:#071017}.menu div{height:27px;padding:0 8px;display:flex;align-items:center;border-bottom:1px solid #162933}.menu div:last-child{border:0}.menu .sel,.menu div:hover{background:linear-gradient(#294b5c,#102630);color:#fff}.menu i{font-style:normal;width:25px;text-align:center;color:#79a0b2}
+.box{border:1px solid #263d49;background:#071017;margin-top:6px}.box h4,.pt{margin:0;padding:7px 8px;background:linear-gradient(#182b36,#09141a);border-bottom:1px solid #263d49;color:#dce7ec}.box p{margin:7px 8px;color:#8296a1}
+.resources{height:61px;border:1px solid #2a424f;background:linear-gradient(#12212a,#060d12);display:grid;grid-template-columns:repeat(4,1fr);margin-bottom:6px}.res{display:flex;align-items:center;gap:7px;padding:5px 8px;border-right:1px solid #1d323d}.res:last-child{border:0}.resicon{width:27px;height:27px;border-radius:4px;background:radial-gradient(circle,#d9e2e6,#536a75 50%,#14232b)}.res b{display:block;color:#f0f5f7;font-size:13px}.res small{color:#6f9aad}
+.events{border:1px solid #263d49;background:#060d12;margin-bottom:6px}.event{display:grid;grid-template-columns:24% 46% 30%;padding:5px 8px;border-bottom:1px solid #172a34}.event:last-child{border:0}.green{color:#83ba9d}.red{color:#d98b8b}
+.panel{border:1px solid #2b4350;background:rgba(5,12,17,.96);margin-bottom:6px;box-shadow:0 2px 8px #000}.title{padding:7px 9px;background:linear-gradient(#192c38,#09151c);border-bottom:1px solid #2b4350;color:#e0eaee;font-size:14px;font-weight:bold}.body{padding:9px}
+.overview{height:340px;position:relative;overflow:hidden;background:radial-gradient(circle at 50% 50%,#102733,#040a0e 60%,#020507)}.stars{position:absolute;inset:0;background-image:radial-gradient(#9bb1bb 1px,transparent 1px),radial-gradient(#fff 1px,transparent 1px);background-size:67px 71px,109px 93px;opacity:.22}.planet{position:absolute;width:215px;height:215px;left:50%;top:45px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle at 35% 28%,#b4d0c3,#527b70 23%,#183936 55%,#06110f 75%);box-shadow:-25px 20px 45px #000,0 0 35px #75a59a44}.info{position:absolute;top:12px;width:190px;background:#040b10cc;border:1px solid #29434f}.info.l{left:10px}.info.r{right:10px}.info h4{margin:0;padding:6px;background:#10212a;border-bottom:1px solid #29434f;color:#dce8ed}.line{display:flex;justify-content:space-between;padding:5px 7px;border-bottom:1px solid #142730}.line:last-child{border:0}.hero{position:absolute;bottom:14px;left:0;right:0;text-align:center;text-shadow:0 2px 5px #000}.hero b{font-size:17px}
+.tabs{display:flex;gap:3px;margin:6px 0}.tab{padding:7px 11px;border:1px solid #29424f;background:#0a151c;cursor:pointer}.tab.on{background:#1c3746;border-color:#4d829a;color:#fff}
+.page{display:none}.page.active{display:block}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}.card{border:1px solid #263d49;background:#08131a;padding:9px}.card h3{font-size:13px;margin:0 0 7px;color:#e0e9ed}.cost{color:#8da4af;line-height:1.7}.cost b{color:#d9e6eb}.row{display:flex;justify-content:space-between;gap:7px;align-items:center;border-bottom:1px solid #182d38;padding:6px 0}.row:last-child{border:0}.bar{height:5px;background:#142630;margin:6px 0}.bar i{display:block;height:100%;background:#4b8fac}.tbl{width:100%;border-collapse:collapse}.tbl th,.tbl td{padding:6px 7px;border:1px solid #203742;text-align:left}.tbl th{background:#132630;color:#dbe6eb}.tbl tr:nth-child(even){background:#071219}.danger{background:linear-gradient(#693f43,#301d20);border-color:#815258}.success{color:#83c29e}.warn{color:#d7b47b}.muted{color:#8297a3}
+.right .box{margin-top:0;margin-bottom:6px}.planetrow{display:grid;grid-template-columns:39px 1fr 20px;gap:6px;align-items:center;padding:7px 5px;border-bottom:1px solid #192f39}.planetrow.on{background:#17303d}.pimg{width:34px;height:34px;border-radius:50%;border:1px solid #496471;background:radial-gradient(circle at 35% 30%,#c4d9d0,#557c73 35%,#10262d 75%)}.coords{font-size:11px;color:#8da7b3}.num{text-align:center;color:#c8d5db}
+.log{max-height:170px;overflow:auto}.log div{padding:5px;border-bottom:1px solid #172a33}
+.notice{padding:8px;border:1px solid #355363;background:#0a1820;color:#a9c1cc;margin-bottom:7px}
+.modal{position:fixed;inset:0;background:#0009;display:none;align-items:center;justify-content:center;z-index:20}.modal.show{display:flex}.modalbox{width:min(520px,94vw);border:1px solid #466474;background:#081219;box-shadow:0 10px 40px #000}.modalbox h3{margin:0;padding:9px;background:#162b37}.modalbody{padding:12px}.modalfoot{padding:9px;border-top:1px solid #29404c;text-align:right}
+.footer{text-align:center;color:#627985;padding:10px}
+@media(max-width:850px){.shell{grid-template-columns:52px 1fr;margin:3px}.right{display:none}.logo{height:50px}.logo b{font-size:0}.logo b:after{content:"VD";font-size:20px}.logo small{display:none}.menu div{justify-content:center}.menu span{display:none}.menu i{width:auto}.topnav{display:none}.resources{height:56px}.res{padding:3px}.resicon{width:22px;height:22px}.res b{font-size:10px}.res small{display:none}.event{grid-template-columns:1fr}.event span:nth-child(n+2){display:none}.info{display:none}.overview{height:300px}.planet{width:190px;height:190px;top:45px}.grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<div class="top"><span class="player">Spieler: Commander</span><span>✉</span><div class="topnav"><span>Buddylist</span><span>Notizen</span><span>Statistiken</span><span>Suche</span><span>Einstellungen</span><span>Support</span><span>Logout</span></div><span class="clock" id="clock"></span></div>
+<div class="top"><b>Seeker Commander</b><span>✉ 0</span><div class="topnav"><span onclick="showPage('overview')">Übersicht</span><span>Freunde</span><span>Notizen</span><span>Suche</span><span>Optionen</span><span>Support</span></div><span class="clock" id="clock"></span></div>
 <div class="shell">
-<aside class="left">
-<div class="logo"><div><b>VOID</b><small>DOMINION</small></div></div>
+<aside>
+<div class="logo"><div><b>VOID DOMINION</b><small>CLASSIC SERVER</small></div></div>
 <div class="menu">
-<div class="sel"><i>◉</i><span>Übersicht</span></div><div><i>⛏</i><span>Rohstoffe</span></div><div><i>⌂</i><span>Gebäude</span></div><div><i>⚛</i><span>Forschung</span></div><div><i>⚒</i><span>Werft</span></div><div><i>♜</i><span>Verteidigung</span></div><div><i>✈</i><span>Flotte</span></div><div><i>◎</i><span>Galaxie</span></div><div><i>♟</i><span>Allianz</span></div><div><i>☷</i><span>Rangliste</span></div><div><i>♜</i><span>Händler</span></div><div><i>♻</i><span>Schrotthändler</span></div></div>
-<div class="smallbox"><h4>System</h4><p>Serverzeit<br><b id="serverTime"></b></p><p>Version 0.3 Classic</p></div>
+<div class="sel" data-page="overview"><i>◉</i><span>Übersicht</span></div>
+<div data-page="resources"><i>⛏</i><span>Rohstoffe</span></div>
+<div data-page="buildings"><i>⌂</i><span>Gebäude</span></div>
+<div data-page="research"><i>⚛</i><span>Forschung</span></div>
+<div data-page="shipyard"><i>⚒</i><span>Werft</span></div>
+<div data-page="defense"><i>♜</i><span>Verteidigung</span></div>
+<div data-page="fleet"><i>✈</i><span>Flotte</span></div>
+<div data-page="galaxy"><i>◎</i><span>Galaxie</span></div>
+<div data-page="messages"><i>✉</i><span>Nachrichten</span></div>
+<div data-page="ranking"><i>☷</i><span>Rangliste</span></div>
+<div data-page="merchant"><i>♜</i><span>Händler</span></div>
+<div data-page="scrap"><i>♻</i><span>Schrotthändler</span></div>
+</div>
+<div class="box"><h4>Server</h4><p>Testserver<br><b>1x Wirtschaft</b><br><b>2x Flotte</b></p><p>Autosave: aktiv</p></div>
 </aside>
-<main class="center">
-<div class="resourcebar">
-<div class="resource"><div class="ico"></div><div>Metall<b id="metal">5.000</b><small>+ 30/h</small></div></div>
-<div class="resource"><div class="ico"></div><div>Kristall<b id="crystal">3.000</b><small>+ 20/h</small></div></div>
-<div class="resource"><div class="ico"></div><div>Deuterium<b id="deut">1.500</b><small>+ 10/h</small></div></div>
-<div class="resource"><div class="ico"></div><div>Energie<b id="energy">120</b><small>+ 0/h</small></div></div>
+<main>
+<div class="resources">
+<div class="res"><div class="resicon"></div><div>Metall<b id="metal">0</b><small>+ / h</small></div></div>
+<div class="res"><div class="resicon"></div><div>Kristall<b id="crystal">0</b><small>+ / h</small></div></div>
+<div class="res"><div class="resicon"></div><div>Deuterium<b id="deut">0</b><small>+ / h</small></div></div>
+<div class="res"><div class="resicon"></div><div>Energie<b id="energy">0</b><small>Netz</small></div></div>
 </div>
-<div class="events">
-<div class="event"><span>Eigene Aufträge: <b>2</b></span><span>Nächster: <b>00:41</b></span><span>Art: <b class="green">Ausbau</b></span></div>
-<div class="event"><span>Flottenbewegung: <b>1</b></span><span>Nächster: <b>04:12</b></span><span>Art: <b class="red">Expedition</b></span></div>
-</div>
-<section class="panel"><div class="paneltitle">Übersicht – Asterion</div>
-<div class="overview"><div class="stars"></div>
-<div class="infoleft"><div class="infotitle">Planet [1:105:8]</div><div class="line"><span>Durchmesser:</span><span>12.800 km</span></div><div class="line"><span>Temperatur:</span><span>42–58 °C</span></div><div class="line"><span>Position:</span><span>[1:105:8]</span></div><div class="line"><span>Punkte:</span><span>0 (Platz 1)</span></div><div class="line"><span>Felder:</span><span>0 / 163</span></div></div>
-<div class="planet"></div>
-<div class="inforight"><div class="infotitle">Asterion</div><div class="line"><span>Mond:</span><span>nein</span></div><div class="line"><span>Temperatur:</span><span>42–58 °C</span></div><div class="line"><span>Position:</span><span>[1:105:8]</span></div><div class="line"><span>Punkte:</span><span>0</span></div></div>
-<div class="heroName"><b>Asterion</b><br><span>Heimatplanet [1:105:8]</span></div>
-</div></section>
-<div class="bottomgrid">
-<section class="panel queue"><div class="paneltitle">Gebäude</div><div class="body"><div class="queueItem"><div class="thumb"></div><div><b>Metallmine (Stufe 1)</b><span class="muted">Bereit zum Ausbau</span><br><button onclick="build('metal')">Bauen</button></div></div></div></section>
-<section class="panel queue"><div class="paneltitle">Forschung</div><div class="body"><div class="queueItem"><div class="thumb"></div><div><b>Energietechnik (Stufe 0)</b><span class="muted">Bereit zur Forschung</span><br><button onclick="research()">Forschen</button></div></div></div></section>
-<section class="panel queue"><div class="paneltitle">Werft</div><div class="body"><div class="queueItem"><div class="thumb"></div><div><b>Kleiner Transporter</b><span class="muted">Bauzeit: 00:30</span><br><button onclick="ship()">1 bauen</button></div></div></div></section>
-</div>
-<section class="panel"><div class="paneltitle">Expeditionen</div><div style="padding:10px">Expeditionsslots: <b id="slots">1</b> &nbsp; | &nbsp; Expeditionen: <b id="expos">0</b> &nbsp; | &nbsp; Schiffe gefunden: <b id="ships">0</b><br><br><button onclick="expo()" id="expo">Expedition starten</button> <span id="expoStatus">bereit</span></div></section>
+<div class="events"><div class="event"><span>Gebäude: <b id="buildTimer">frei</b></span><span>Flotten: <b id="fleetTimer">keine</b></span><span>Expedition: <b id="expoTimer" class="green">bereit</b></span></div></div>
+
+<section id="page-overview" class="page active">
+<div class="panel"><div class="title">Übersicht – Asterion</div><div class="overview"><div class="stars"></div><div class="info l"><h4>Planet [1:105:8]</h4><div class="line"><span>Durchmesser</span><span>12.800 km</span></div><div class="line"><span>Temperatur</span><span>42–58 °C</span></div><div class="line"><span>Felder</span><span id="fields">0 / 163</span></div><div class="line"><span>Punkte</span><span id="points">0</span></div></div><div class="planet"></div><div class="info r"><h4>Asterion</h4><div class="line"><span>Mond</span><span>nein</span></div><div class="line"><span>Position</span><span>[1:105:8]</span></div><div class="line"><span>Gebäude</span><span id="buildingsCount">4</span></div><div class="line"><span>Schiffe</span><span id="fleetCount">0</span></div></div><div class="hero"><b>Asterion</b><br>Heimatplanet [1:105:8]</div></div></div>
+<div class="grid"><div class="panel"><div class="title">Bauaufträge</div><div class="body" id="queue">Keine Aufträge</div></div><div class="panel"><div class="title">Letzte Ereignisse</div><div class="body log" id="log"></div></div></div>
+</section>
+
+<section id="page-resources" class="page"><div class="panel"><div class="title">Rohstoffe</div><div class="body"><div class="grid" id="resourceCards"></div></div></div></section>
+<section id="page-buildings" class="page"><div class="panel"><div class="title">Gebäude</div><div class="body"><div class="grid" id="buildingCards"></div></div></div></section>
+<section id="page-research" class="page"><div class="panel"><div class="title">Forschung</div><div class="body"><div class="grid" id="researchCards"></div></div></div></section>
+<section id="page-shipyard" class="page"><div class="panel"><div class="title">Werft</div><div class="body"><div class="grid" id="shipCards"></div></div></div></section>
+<section id="page-defense" class="page"><div class="panel"><div class="title">Verteidigung</div><div class="body"><div class="grid" id="defenseCards"></div></div></div></section>
+<section id="page-fleet" class="page"><div class="panel"><div class="title">Flotte</div><div class="body" id="fleetPage"></div></div></section>
+<section id="page-galaxy" class="page"><div class="panel"><div class="title">Galaxie 1 – System 105</div><div class="body"><div class="notice">Inaktive Testspieler sind mit <b class="muted">i</b> markiert. Du kannst sie zu Testzwecken angreifen.</div><table class="tbl" id="galaxyTable"></table></div></div></section>
+<section id="page-messages" class="page"><div class="panel"><div class="title">Nachrichten & Kampfberichte</div><div class="body log" id="messages"></div></div></section>
+<section id="page-ranking" class="page"><div class="panel"><div class="title">Rangliste</div><div class="body"><table class="tbl" id="rankingTable"></table></div></div></section>
+<section id="page-merchant" class="page"><div class="panel"><div class="title">Rohstoffbörse</div><div class="body"><div class="notice">Test-Wechselkurs: 3 Metall : 2 Kristall : 1 Deuterium.</div><div class="row"><span>Metall</span><input id="tradeMetal" type="number" value="0" min="0"><button onclick="trade('m')">→ Kristall</button></div><div class="row"><span>Kristall</span><input id="tradeCrystal" type="number" value="0" min="0"><button onclick="trade('c')">→ Deuterium</button></div></div></div></section>
+<section id="page-scrap" class="page"><div class="panel"><div class="title">Schrotthändler – 70 %</div><div class="body"><div class="notice">Schiffe werden zu 70 % ihrer Baukosten in Metall/Kristall/Deuterium zurückerstattet.</div><div id="scrapCards"></div></div></div></section>
 </main>
 <aside class="right">
-<section class="panel"><div class="paneltitle">Planeten</div><div class="planetlist">
-<div class="planetrow active"><div class="pimg"></div><div><b>Asterion</b><div class="coords">[1:105:8]</div></div><div class="num">1</div></div>
-<div class="planetrow"><div class="pimg"></div><div><b>Vesper</b><div class="coords">[1:108:7]</div></div><div class="num">2</div></div>
-<div class="planetrow"><div class="pimg moon"></div><div><b>Nyx</b><div class="coords">[2:214:5]</div></div><div class="num">3</div></div>
-<div class="planetrow"><div class="pimg"></div><div><b>Colony II</b><div class="coords">[3:87:6]</div></div><div class="num">4</div></div>
-</div></section>
-<section class="panel"><div class="paneltitle">Letzte Nachrichten</div><div style="padding:8px"><a>Willkommen im Dominion</a><br><br><a>Keine neuen Berichte</a></div></section>
+<div class="box"><h4>Planeten</h4>
+<div class="planetrow on"><div class="pimg"></div><div><b>Asterion</b><div class="coords">[1:105:8]</div></div><div>1</div></div>
+<div class="planetrow"><div class="pimg"></div><div><b>Vesper</b><div class="coords">[1:108:7]</div></div><div>2</div></div>
+<div class="planetrow"><div class="pimg"></div><div><b>Nyx</b><div class="coords">[2:214:5]</div></div><div>3</div></div>
+</div>
+<div class="box"><h4>Expedition</h4><p>Slots: <b id="slots">1 / 1</b></p><p>Expeditionen: <b id="expos">0</b></p><p>Schiffe gefunden: <b id="shipsFound">0</b></p><button onclick="startExpo()" id="expoBtn">Expedition starten</button></div>
+<div class="box"><h4>Serverstatus</h4><p><span class="green">● Online</span></p><p>Testspieler: 8</p></div>
 </aside>
 </div>
-<div class="footer">Hilfe &nbsp;|&nbsp; Forum &nbsp;|&nbsp; Regeln &nbsp;|&nbsp; Void Dominion © 2026</div>
+<div class="footer">Void Dominion Classic © 2026 · Testserver</div>
+
+<div class="modal" id="attackModal"><div class="modalbox"><h3 id="attackTitle">Angriff planen</h3><div class="modalbody" id="attackBody"></div><div class="modalfoot"><button onclick="closeModal()">Abbrechen</button> <button onclick="confirmAttack()">Angriff starten</button></div></div></div>
+
 <script>
-let s={m:5000,c:3000,d:1500,ex:0,sh:0};
-const f=x=>Math.floor(x).toLocaleString('de-DE');
-function render(){metal.textContent=f(s.m);crystal.textContent=f(s.c);deut.textContent=f(s.d);expos.textContent=s.ex;ships.textContent=f(s.sh)}
-function build(t){let cm=60,cc=15;if(s.m>=cm&&s.c>=cc){s.m-=cm;s.c-=cc;alert('Metallmine Ausbau gestartet.');render()}else alert('Nicht genug Ressourcen.')}
-function research(){if(s.m>=1000&&s.c>=500){s.m-=1000;s.c-=500;alert('Forschung gestartet.');render()}else alert('Nicht genug Ressourcen.')}
-function ship(){if(s.m>=2000&&s.c>=1000){s.m-=2000;s.c-=1000;alert('Kleiner Transporter in Auftrag gegeben.');render()}else alert('Nicht genug Ressourcen.')}
-function expo(){if(window.busy)return;window.busy=1;expo.disabled=true;expoStatus.textContent='läuft…';s.ex++;render();setTimeout(()=>{window.busy=0;expo.disabled=false;expoStatus.textContent='bereit';let r=Math.random();if(r<.35){let x=1000+Math.random()*9000|0;s.m+=x}else if(r<.65){let x=500+Math.random()*5000|0;s.c+=x}else if(r<.85){let x=250+Math.random()*3000|0;s.d+=x}else{s.sh+=1+Math.random()*40|0}render()},15000)}
-setInterval(()=>{s.m+=30/3600;s.c+=20/3600;s.d+=10/3600;let now=new Date();clock.textContent=now.toLocaleString('de-DE');serverTime.textContent=now.toLocaleTimeString('de-DE');render()},1000);render();
-</script></body></html>
+const defaultState={
+m:150000,c:80000,d:40000,energy:120,points:0,fields:0,expos:0,shipsFound:0,
+buildings:{metal:10,crystal:8,deut:6,solar:8,storageM:6,storageC:6,storageD:6,robot:4,shipyard:3},
+research:{energy:4,computer:3,astrophysics:4,weapons:5,shield:4,armor:5,combustion:5,impulse:3,hyperspace:2},
+ships:{lj:250,cruiser:80,bs:40,bc:30,bomber:15,destroyer:10,reaper:2,gt:80,pt:120,recycler:40,spy:500,pathfinder:20},
+defense:{rocket:300,ll:120,gauss:20,plasma:5,shieldS:1,shieldL:1},
+messages:[{t:'Willkommen',x:'Dein Testserver ist bereit. Du kannst Gebäude bauen, forschen, Schiffe bauen, Expos fliegen und die inaktiven Testspieler angreifen.'}]
+};
+let S=JSON.parse(localStorage.getItem('voidDominionSave')||'null')||structuredClone(defaultState), target=null;
+const bots=[
+['VoidMiner','1:105:3',120000,80000,40000,0],['DarkNova','1:105:5',220000,140000,65000,1],['SleepyOne','1:105:9',65000,45000,18000,1],
+['AstraBot','1:105:12',340000,190000,95000,1],['OldEmpire','1:105:15',900000,600000,300000,1],['NoobPlanet','1:105:18',30000,18000,8000,1],
+['Nebula','1:105:20',500000,300000,150000,1],['IronGhost','1:105:23',160000,100000,50000,1]
+];
+const shipData={
+lj:['Leichter Jäger',3000,1000,0],cruiser:['Kreuzer',20000,7000,2000],bs:['Schlachtschiff',45000,15000,0],bc:['Schlachtkreuzer',30000,40000,15000],
+bomber:['Bomber',50000,25000,15000],destroyer:['Zerstörer',60000,50000,15000],reaper:['Reaper',85000,55000,20000],gt:['Großer Transporter',6000,6000,0],
+pt:['Kleiner Transporter',2000,2000,0],recycler:['Recycler',10000,6000,2000],spy:['Spionagesonde',1000,0,0],pathfinder:['Pathfinder',8000,15000,8000]
+};
+const buildData={
+metal:['Metallmine',60,15,'m'],crystal:['Kristallmine',48,24,'c'],deut:['Deuteriumsynthesizer',225,75,'d'],solar:['Solarkraftwerk',75,30,'e'],robot:['Roboterfabrik',400,120,'m'],shipyard:['Raumschiffwerft',400,200,'m'],storageM:['Metallspeicher',100,0,'m'],storageC:['Kristallspeicher',100,0,'c'],storageD:['Deuteriumtank',100,0,'d']
+};
+const researchData={energy:['Energietechnik',800,400],computer:['Computertechnik',400,800],astrophysics:['Astrophysik',4000,8000],weapons:['Waffentechnik',800,200],shield:['Schildtechnik',200,600],armor:['Raumschiffpanzerung',1000,0],combustion:['Verbrennungstriebwerk',200,300],impulse:['Impulstriebwerk',2000,4000],hyperspace:['Hyperraumantrieb',4000,8000]};
+function save(){localStorage.setItem('voidDominionSave',JSON.stringify(S))}
+function f(x){return Math.floor(x).toLocaleString('de-DE')}
+function addMsg(t,x){S.messages.unshift({t,x});S.messages=S.messages.slice(0,80);save()}
+function renderTop(){metal.textContent=f(S.m);crystal.textContent=f(S.c);deut.textContent=f(S.d);energy.textContent=f(S.energy);expos.textContent=S.expos;shipsFound.textContent=f(S.shipsFound);points.textContent=f(S.points);fleetCount.textContent=f(Object.values(S.ships).reduce((a,b)=>a+b,0));}
+function production(){return {m:30*S.buildings.metal,c:20*S.buildings.crystal,d:10*S.buildings.deut}}
+function renderResources(){let p=production();resourceCards.innerHTML=[['Metall',S.m,p.m,'m'],['Kristall',S.c,p.c,'c'],['Deuterium',S.d,p.d,'d']].map(a=>`<div class="card"><h3>${a[0]}</h3><div class="cost">Bestand: <b>${f(a[1])}</b><br>Produktion: <b>+${f(a[2])}/h</b></div><div class="bar"><i style="width:${Math.min(100,a[1]/100000*100)}%"></i></div><span class="muted">Kapazität 1.000.000</span></div>`).join('')}
+function renderBuildings(){buildingCards.innerHTML=Object.entries(buildData).map(([k,v])=>{let l=S.buildings[k],costM=Math.floor(v[1]*1.5**l),costC=Math.floor(v[2]*1.5**l);return `<div class="card"><h3>${v[0]} – Stufe ${l}</h3><div class="cost">Kosten: <b>🪨 ${f(costM)}</b> <b>💎 ${f(costC)}</b><br>Produktion/Bonus: <b>${k==='metal'?f(30*l):k==='crystal'?f(20*l):k==='deut'?f(10*l):'aktiv'}</b></div><br><button onclick="build('${k}')">Ausbauen</button></div>`}).join('')}
+function renderResearch(){researchCards.innerHTML=Object.entries(researchData).map(([k,v])=>{let l=S.research[k],m=Math.floor(v[1]*1.8**l),c=Math.floor(v[2]*1.8**l);return `<div class="card"><h3>${v[0]} – Stufe ${l}</h3><div class="cost">Kosten: <b>🪨 ${f(m)}</b> <b>💎 ${f(c)}</b></div><br><button onclick="research('${k}')">Forschen</button></div>`}).join('')}
+function renderShips(){shipCards.innerHTML=Object.entries(shipData).map(([k,v])=>`<div class="card"><h3>${v[0]}</h3><div class="cost">Bestand: <b>${f(S.ships[k]||0)}</b><br>🪨 ${f(v[1])} · 💎 ${f(v[2])} · ⛽ ${f(v[3])}</div><br><button onclick="buildShip('${k}')">1 bauen</button> <button onclick="buildShip('${k}',10)">10 bauen</button></div>`).join('')}
+function renderDefense(){defenseCards.innerHTML=[['rocket','Raketenwerfer',2000,0,0],['ll','Leichtes Lasergeschütz',1500,500,0],['gauss','Gausskanone',20000,15000,2000],['plasma','Plasmageschütz',50000,50000,30000],['shieldS','Kleine Schildkuppel',10000,10000,0],['shieldL','Große Schildkuppel',50000,50000,0]].map(v=>`<div class="card"><h3>${v[1]}</h3><div class="cost">Bestand: <b>${f(S.defense[v[0]])}</b><br>🪨 ${f(v[2])} · 💎 ${f(v[3])} · ⛽ ${f(v[4])}</div><br><button onclick="buildDefense('${v[0]}',${v[2]},${v[3]},${v[4]})">1 bauen</button></div>`).join('')}
+function renderFleet(){fleetPage.innerHTML='<div class="notice">Deine Testflotte</div><table class="tbl"><tr><th>Schiff</th><th>Anzahl</th><th>Aktion</th></tr>'+Object.entries(shipData).map(([k,v])=>`<tr><td>${v[0]}</td><td>${f(S.ships[k]||0)}</td><td><button onclick="sendSingle('${k}')">1 nach Expedition</button></td></tr>`).join('')+'</table>'}
+function renderGalaxy(){galaxyTable.innerHTML='<tr><th>Pos.</th><th>Spieler</th><th>Ressourcen</th><th>Status</th><th>Aktion</th></tr>'+bots.map((b,i)=>`<tr><td>${b[1]}</td><td><b>${b[0]}</b> <span class="muted">i</span></td><td>🪨 ${f(b[2])} · 💎 ${f(b[3])} · ⛽ ${f(b[4])}</td><td>${b[5]?'inaktiv':'offline'}</td><td><button onclick="attack(${i})">Angreifen</button></td></tr>`).join('')}
+function renderRanking(){rankingTable.innerHTML='<tr><th>#</th><th>Spieler</th><th>Punkte</th><th>Status</th></tr><tr><td>1</td><td>Seeker Commander</td><td>'+f(S.points)+'</td><td class="green">online</td></tr>'+bots.slice().sort((a,b)=>b[2]-a[2]).map((b,i)=>`<tr><td>${i+2}</td><td>${b[0]}</td><td>${f(Math.floor((b[2]+b[3]+b[4])/1000))}</td><td class="muted">inaktiv</td></tr>`).join('')}
+function renderMessages(){messages.innerHTML=S.messages.map(m=>`<div><b>${m.t}</b><br>${m.x}</div>`).join('')}
+function renderScrap(){scrapCards.innerHTML=Object.entries(shipData).filter(([k])=>S.ships[k]>0).map(([k,v])=>{let m=Math.floor(v[1]*.7),c=Math.floor(v[2]*.7),d=Math.floor(v[3]*.7);return `<div class="row"><span><b>${v[0]}</b> × ${f(S.ships[k])}</span><span>70%: 🪨 ${f(m)} · 💎 ${f(c)} · ⛽ ${f(d)}</span><button onclick="scrap('${k}')">1 verschrotten</button></div>`}).join('')}
+function render(){renderTop();renderResources();renderBuildings();renderResearch();renderShips();renderDefense();renderFleet();renderGalaxy();renderRanking();renderMessages();renderScrap();document.getElementById('queue').innerHTML='<span class="muted">Keine laufenden Bauaufträge.</span>'}
+function spend(m,c,d){if(S.m<m||S.c<c||S.d<d)return false;S.m-=m;S.c-=c;S.d-=d;return true}
+function build(k){let v=buildData[k],l=S.buildings[k],m=Math.floor(v[1]*1.5**l),c=Math.floor(v[2]*1.5**l);if(!spend(m,c,0)){addMsg('Bau abgebrochen','Nicht genug Ressourcen für '+v[0]+'.');render();return}S.buildings[k]++;S.points+=Math.floor((m+c)/1000);addMsg('Gebäude fertig',v[0]+' wurde auf Stufe '+S.buildings[k]+' ausgebaut.');render();save()}
+function research(k){let v=researchData[k],l=S.research[k],m=Math.floor(v[1]*1.8**l),c=Math.floor(v[2]*1.8**l);if(!spend(m,c,0)){addMsg('Forschung abgebrochen','Nicht genug Ressourcen für '+v[0]+'.');render();return}S.research[k]++;S.points+=Math.floor((m+c)/1000);addMsg('Forschung abgeschlossen',v[0]+' ist jetzt Stufe '+S.research[k]+'.');render();save()}
+function buildShip(k,n=1){let v=shipData[k],m=v[1]*n,c=v[2]*n,d=v[3]*n;if(!spend(m,c,d)){addMsg('Werft','Nicht genug Ressourcen für '+n+'× '+v[0]+'.');render();return}S.ships[k]=(S.ships[k]||0)+n;S.points+=Math.floor((m+c+d)/1000);addMsg('Werft',n+'× '+v[0]+' gebaut.');render();save()}
+function buildDefense(k,m,c,d){if(!spend(m,c,d)){addMsg('Verteidigung','Nicht genug Ressourcen.');render();return}S.defense[k]++;S.points+=Math.floor((m+c+d)/1000);addMsg('Verteidigung','1 Einheit gebaut.');render();save()}
+function sendSingle(k){if((S.ships[k]||0)<1){alert('Kein Schiff vorhanden.');return}S.ships[k]--;S.shipsFound++;addMsg('Flottenbewegung','1× '+shipData[k][0]+' für Test-Expedition bereitgestellt.');render();save()}
+function startExpo(){if(window.expoBusy)return;let total=Object.values(S.ships).reduce((a,b)=>a+b,0);if(total<20){alert('Für eine Expedition brauchst du mindestens 20 Schiffe.');return}window.expoBusy=true;expoBtn.disabled=true;expoStatus.textContent='läuft…';addMsg('Expedition','Deine Flotte ist auf Expedition gegangen.');let fleet=Object.keys(S.ships).filter(k=>S.ships[k]>0);if(fleet.length)S.ships[fleet[0]]-=Math.min(20,S.ships[fleet[0]]);render();setTimeout(()=>{window.expoBusy=false;expoBtn.disabled=false;expoStatus.textContent='bereit';S.expos++;let r=Math.random();if(r<.35){let x=15000+Math.random()*65000|0;S.m+=x;addMsg('Expedition – großer Fund','🪨 '+f(x)+' Metall gefunden.')}else if(r<.6){let x=9000+Math.random()*40000|0;S.c+=x;addMsg('Expedition – Kristallfund','💎 '+f(x)+' Kristall gefunden.')}else if(r<.78){let x=5000+Math.random()*25000|0;S.d+=x;addMsg('Expedition – Deuteriumfund','⛽ '+f(x)+' Deuterium gefunden.')}else if(r<.9){let x=100+Math.random()*900|0;S.shipsFound+=x;S.ships.pt+=x;addMsg('Expedition – Schiffe','🚀 '+f(x)+' Kleine Transporter geborgen.')}else if(r<.96){let x=100+Math.random()*500|0;addMsg('Expedition – Dunkle Materie','🌑 '+f(x)+' Dunkle Materie gefunden.')}else addMsg('Expedition – leer','Die Flotte fand nichts.');render();save()},12000)}
+function attack(i){target=i;attackTitle.textContent='Angriff auf '+bots[i][0];attackBody.innerHTML=`<div class="notice">Ziel: <b>${bots[i][0]}</b> [${bots[i][1]}] – inaktiv</div><p>Beute im Orbit: 🪨 ${f(bots[i][2])} · 💎 ${f(bots[i][3])} · ⛽ ${f(bots[i][4])}</p><p>Deine Testflotte wird automatisch eingesetzt. Das Ergebnis wird simuliert.</p>`;attackModal.classList.add('show')}
+function closeModal(){attackModal.classList.remove('show')}
+function confirmAttack(){if(target===null)return;let b=bots[target],my=Object.values(S.ships).reduce((a,x)=>a+x,0);if(my<10){alert('Mindestens 10 Schiffe benötigt.');return}let power=my*(1+S.research.weapons*.15),def=(b[2]+b[3]+b[4])/20000;let win=power>def*.8||Math.random()>.35;let loot=win?{m:Math.floor(b[2]*.25),c:Math.floor(b[3]*.25),d:Math.floor(b[4]*.25)}:{m:0,c:0,d:0};if(win){S.m+=loot.m;S.c+=loot.c;S.d+=loot.d;S.points+=Math.floor((loot.m+loot.c+loot.d)/1000);addMsg('Kampfbericht – Sieg','Angriff auf '+b[0]+' gewonnen. Beute: 🪨 '+f(loot.m)+' · 💎 '+f(loot.c)+' · ⛽ '+f(loot.d)+'.')}else{let loss=Math.min(5,Math.max(1,Math.floor(my*.08)));for(let k of Object.keys(S.ships)){let x=Math.min(S.ships[k],Math.floor(loss/3));S.ships[k]-=x}addMsg('Kampfbericht – Niederlage','Deine Flotte erlitt Verluste beim Angriff auf '+b[0]+'.')}closeModal();render();save()}
+function trade(type){let x=Number(type==='m'?tradeMetal.value:tradeCrystal.value)||0;if(type==='m'){if(S.m<x){alert('Nicht genug Metall.');return}S.m-=x;S.c+=Math.floor(x*2/3)}else{if(S.c<x){alert('Nicht genug Kristall.');return}S.c-=x;S.d+=Math.floor(x/2)}addMsg('Händler','Rohstoffe getauscht.');render();save()}
+function scrap(k){let v=shipData[k];if(S.ships[k]<1)return;S.ships[k]--;S.m+=Math.floor(v[1]*.7);S.c+=Math.floor(v[2]*.7);S.d+=Math.floor(v[3]*.7);addMsg('Schrotthändler',shipData[k][0]+' für 70 % verschrottet.');render();save()}
+document.querySelectorAll('.menu div').forEach(el=>el.addEventListener('click',()=>{document.querySelectorAll('.menu div').forEach(x=>x.classList.remove('sel'));el.classList.add('sel');showPage(el.dataset.page)}));
+function showPage(p){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById('page-'+p).classList.add('active');render()}
+setInterval(()=>{let p=production();S.m=Math.min(1000000,S.m+p.m/3600);S.c=Math.min(1000000,S.c+p.c/3600);S.d=Math.min(1000000,S.d+p.d/3600);clock.textContent=new Date().toLocaleTimeString('de-DE');renderTop();save()},1000);
+render();
+</script>
+</body></html>
