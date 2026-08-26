@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Void Dominion – Classic</title>
+<style>
+html,body{margin:0;min-height:100%;background:#000;color:#c7d1d8;font-family:Arial,Helvetica,sans-serif;font-size:12px}
+body{background:
+radial-gradient(circle at 50% 25%,rgba(35,63,82,.32),transparent 45%),
+linear-gradient(#07111a,#020507 70%);overflow-x:hidden}
+a{color:#9dbfd4;text-decoration:none}
+.top{height:34px;background:linear-gradient(#18262f,#071016);border-bottom:1px solid #334957;box-shadow:0 1px 4px #000;display:flex;align-items:center;padding:0 10px;gap:18px;color:#aab9c2}
+.top .player{color:#e4edf2;font-weight:bold}.topnav{display:flex;gap:18px;flex:1}.topnav span{cursor:pointer}.clock{white-space:nowrap}
+.shell{width:min(1180px,100%);margin:8px auto;display:grid;grid-template-columns:185px minmax(0,1fr) 190px;gap:7px}
+.left,.right,.center{min-width:0}
+.logo{height:92px;background:linear-gradient(135deg,#0a1720,#02070b);border:1px solid #273d4b;display:flex;align-items:center;justify-content:center;margin-bottom:6px;box-shadow:inset 0 0 25px #000}
+.logo b{font-size:22px;letter-spacing:5px;color:#d6e4eb;text-shadow:0 0 8px #5f91aa}.logo small{display:block;text-align:center;font-size:9px;letter-spacing:3px;color:#7194a7}
+.menu{border:1px solid #263c49;background:linear-gradient(#13232d,#071016);margin-bottom:3px;box-shadow:inset 0 1px #243844}
+.menu div{height:27px;display:flex;align-items:center;padding:0 8px;border-bottom:1px solid #162933;color:#b9c7cf}
+.menu div:last-child{border-bottom:0}.menu div:hover,.menu .sel{background:linear-gradient(#284758,#122b39);color:#fff}
+.menu i{width:24px;color:#7fa4b8;font-style:normal;text-align:center;font-size:14px}
+.smallbox{border:1px solid #263c49;background:#071017;margin-top:6px}.smallbox h4{margin:0;padding:6px 8px;background:linear-gradient(#182b36,#0b151b);color:#d2dce2;border-bottom:1px solid #263c49}.smallbox p{margin:7px 8px;color:#879aa6}
+.resourcebar{height:62px;border:1px solid #2b4350;background:linear-gradient(#111e27,#060d12);display:grid;grid-template-columns:repeat(4,1fr);margin-bottom:7px}
+.resource{display:flex;align-items:center;gap:7px;padding:5px 9px;border-right:1px solid #1e323e}.resource:last-child{border:0}.ico{width:28px;height:28px;border-radius:4px;background:radial-gradient(circle,#cbd8df,#4e6774 55%,#14232b);box-shadow:0 0 8px #6b91a055}.resource b{display:block;color:#e8eef2;font-size:13px}.resource small{color:#7195a7}
+.events{border:1px solid #273e4b;background:#060d12;margin-bottom:7px}
+.event{display:grid;grid-template-columns:25% 45% 30%;padding:5px 8px;border-bottom:1px solid #172b36}.event:last-child{border:0}.event .red{color:#d78383}.event .green{color:#82b49a}
+.panel{border:1px solid #2b4350;background:rgba(5,12,17,.93);box-shadow:0 2px 8px #000;margin-bottom:7px}
+.paneltitle{padding:7px 10px;background:linear-gradient(#192c38,#0a151c);border-bottom:1px solid #2b4350;color:#dbe5ea;font-size:14px;font-weight:bold}
+.overview{min-height:410px;position:relative;overflow:hidden;background:
+radial-gradient(circle at 50% 44%,rgba(78,116,133,.25),transparent 30%),
+radial-gradient(circle at 50% 55%,#0b1922 0,#050b10 48%,#020506 75%)}
+.stars{position:absolute;inset:0;background-image:radial-gradient(#7893a0 1px,transparent 1px),radial-gradient(#fff 1px,transparent 1px);background-size:71px 61px,113px 97px;opacity:.2}
+.planet{position:absolute;width:245px;height:245px;left:50%;top:42px;transform:translateX(-50%);border-radius:50%;background:
+radial-gradient(circle at 34% 28%,#b6d3c8 0 5%,#537f78 19%,#183a42 43%,#07151c 69%,#020508 75%);
+box-shadow:-25px 20px 45px #000,0 0 35px #6aa0b355,inset -25px -10px 30px #000}
+.infoleft,.inforight{position:absolute;top:18px;width:205px;background:rgba(4,10,14,.82);border:1px solid #28424f}
+.infoleft{left:12px}.inforight{right:12px}.infotitle{padding:7px;color:#dbe7ed;background:#0e1d26;border-bottom:1px solid #27404d}.line{display:flex;justify-content:space-between;padding:6px 8px;border-bottom:1px solid #142731}.line:last-child{border:0}.heroName{position:absolute;left:0;right:0;bottom:18px;text-align:center;color:#dce9ef;text-shadow:0 2px 5px #000}.heroName b{font-size:17px}
+.bottomgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}.queue{min-height:145px}.queue .body{padding:9px}.queueItem{display:flex;gap:8px;border-bottom:1px solid #1a303b;padding:6px 0}.thumb{width:55px;height:45px;border:1px solid #304a58;background:radial-gradient(circle,#698897,#172a35 60%,#060b0f)}.queueItem b{display:block;color:#dce7ec}.muted{color:#7d919c}.right .planetlist{padding:4px}.planetrow{display:grid;grid-template-columns:42px 1fr 22px;align-items:center;gap:7px;padding:7px 5px;border-bottom:1px solid #1a303b}.planetrow.active{background:linear-gradient(#1b3544,#0c1d27)}.pimg{width:36px;height:36px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#c4d9d2,#547b74 35%,#10242b 72%);border:1px solid #466271}.pimg.moon{background:radial-gradient(circle at 35% 30%,#d4d4cf,#666863 45%,#171a1a 75%)}.coords{color:#8fa8b6;font-size:11px}.num{color:#c7d4db;text-align:center}
+.footer{color:#637984;text-align:center;padding:12px}
+@media(max-width:850px){.shell{grid-template-columns:52px minmax(0,1fr);margin:4px}.right{display:none}.logo{height:52px}.logo b{font-size:0}.logo b:after{content:"VD";font-size:20px}.logo small{display:none}.menu div{justify-content:center;padding:0}.menu div span{display:none}.menu i{width:auto}.smallbox{display:none}.top{gap:8px}.topnav{display:none}.resourcebar{grid-template-columns:repeat(4,1fr);height:58px}.resource{padding:4px}.resource b{font-size:10px}.resource small{display:none}.ico{width:23px;height:23px}.event{grid-template-columns:1fr}.event span:nth-child(n+2){display:none}.infoleft,.inforight{display:none}.planet{width:205px;height:205px}.overview{min-height:340px}.bottomgrid{grid-template-columns:1fr}.shell .center{min-width:0}}
+</style>
+</head>
+<body>
+<div class="top"><span class="player">Spieler: Commander</span><span>✉</span><div class="topnav"><span>Buddylist</span><span>Notizen</span><span>Statistiken</span><span>Suche</span><span>Einstellungen</span><span>Support</span><span>Logout</span></div><span class="clock" id="clock"></span></div>
+<div class="shell">
+<aside class="left">
+<div class="logo"><div><b>VOID</b><small>DOMINION</small></div></div>
+<div class="menu">
+<div class="sel"><i>◉</i><span>Übersicht</span></div><div><i>⛏</i><span>Rohstoffe</span></div><div><i>⌂</i><span>Gebäude</span></div><div><i>⚛</i><span>Forschung</span></div><div><i>⚒</i><span>Werft</span></div><div><i>♜</i><span>Verteidigung</span></div><div><i>✈</i><span>Flotte</span></div><div><i>◎</i><span>Galaxie</span></div><div><i>♟</i><span>Allianz</span></div><div><i>☷</i><span>Rangliste</span></div><div><i>♜</i><span>Händler</span></div><div><i>♻</i><span>Schrotthändler</span></div></div>
+<div class="smallbox"><h4>System</h4><p>Serverzeit<br><b id="serverTime"></b></p><p>Version 0.3 Classic</p></div>
+</aside>
+<main class="center">
+<div class="resourcebar">
+<div class="resource"><div class="ico"></div><div>Metall<b id="metal">5.000</b><small>+ 30/h</small></div></div>
+<div class="resource"><div class="ico"></div><div>Kristall<b id="crystal">3.000</b><small>+ 20/h</small></div></div>
+<div class="resource"><div class="ico"></div><div>Deuterium<b id="deut">1.500</b><small>+ 10/h</small></div></div>
+<div class="resource"><div class="ico"></div><div>Energie<b id="energy">120</b><small>+ 0/h</small></div></div>
+</div>
+<div class="events">
+<div class="event"><span>Eigene Aufträge: <b>2</b></span><span>Nächster: <b>00:41</b></span><span>Art: <b class="green">Ausbau</b></span></div>
+<div class="event"><span>Flottenbewegung: <b>1</b></span><span>Nächster: <b>04:12</b></span><span>Art: <b class="red">Expedition</b></span></div>
+</div>
+<section class="panel"><div class="paneltitle">Übersicht – Asterion</div>
+<div class="overview"><div class="stars"></div>
+<div class="infoleft"><div class="infotitle">Planet [1:105:8]</div><div class="line"><span>Durchmesser:</span><span>12.800 km</span></div><div class="line"><span>Temperatur:</span><span>42–58 °C</span></div><div class="line"><span>Position:</span><span>[1:105:8]</span></div><div class="line"><span>Punkte:</span><span>0 (Platz 1)</span></div><div class="line"><span>Felder:</span><span>0 / 163</span></div></div>
+<div class="planet"></div>
+<div class="inforight"><div class="infotitle">Asterion</div><div class="line"><span>Mond:</span><span>nein</span></div><div class="line"><span>Temperatur:</span><span>42–58 °C</span></div><div class="line"><span>Position:</span><span>[1:105:8]</span></div><div class="line"><span>Punkte:</span><span>0</span></div></div>
+<div class="heroName"><b>Asterion</b><br><span>Heimatplanet [1:105:8]</span></div>
+</div></section>
+<div class="bottomgrid">
+<section class="panel queue"><div class="paneltitle">Gebäude</div><div class="body"><div class="queueItem"><div class="thumb"></div><div><b>Metallmine (Stufe 1)</b><span class="muted">Bereit zum Ausbau</span><br><button onclick="build('metal')">Bauen</button></div></div></div></section>
+<section class="panel queue"><div class="paneltitle">Forschung</div><div class="body"><div class="queueItem"><div class="thumb"></div><div><b>Energietechnik (Stufe 0)</b><span class="muted">Bereit zur Forschung</span><br><button onclick="research()">Forschen</button></div></div></div></section>
+<section class="panel queue"><div class="paneltitle">Werft</div><div class="body"><div class="queueItem"><div class="thumb"></div><div><b>Kleiner Transporter</b><span class="muted">Bauzeit: 00:30</span><br><button onclick="ship()">1 bauen</button></div></div></div></section>
+</div>
+<section class="panel"><div class="paneltitle">Expeditionen</div><div style="padding:10px">Expeditionsslots: <b id="slots">1</b> &nbsp; | &nbsp; Expeditionen: <b id="expos">0</b> &nbsp; | &nbsp; Schiffe gefunden: <b id="ships">0</b><br><br><button onclick="expo()" id="expo">Expedition starten</button> <span id="expoStatus">bereit</span></div></section>
+</main>
+<aside class="right">
+<section class="panel"><div class="paneltitle">Planeten</div><div class="planetlist">
+<div class="planetrow active"><div class="pimg"></div><div><b>Asterion</b><div class="coords">[1:105:8]</div></div><div class="num">1</div></div>
+<div class="planetrow"><div class="pimg"></div><div><b>Vesper</b><div class="coords">[1:108:7]</div></div><div class="num">2</div></div>
+<div class="planetrow"><div class="pimg moon"></div><div><b>Nyx</b><div class="coords">[2:214:5]</div></div><div class="num">3</div></div>
+<div class="planetrow"><div class="pimg"></div><div><b>Colony II</b><div class="coords">[3:87:6]</div></div><div class="num">4</div></div>
+</div></section>
+<section class="panel"><div class="paneltitle">Letzte Nachrichten</div><div style="padding:8px"><a>Willkommen im Dominion</a><br><br><a>Keine neuen Berichte</a></div></section>
+</aside>
+</div>
+<div class="footer">Hilfe &nbsp;|&nbsp; Forum &nbsp;|&nbsp; Regeln &nbsp;|&nbsp; Void Dominion © 2026</div>
+<script>
+let s={m:5000,c:3000,d:1500,ex:0,sh:0};
+const f=x=>Math.floor(x).toLocaleString('de-DE');
+function render(){metal.textContent=f(s.m);crystal.textContent=f(s.c);deut.textContent=f(s.d);expos.textContent=s.ex;ships.textContent=f(s.sh)}
+function build(t){let cm=60,cc=15;if(s.m>=cm&&s.c>=cc){s.m-=cm;s.c-=cc;alert('Metallmine Ausbau gestartet.');render()}else alert('Nicht genug Ressourcen.')}
+function research(){if(s.m>=1000&&s.c>=500){s.m-=1000;s.c-=500;alert('Forschung gestartet.');render()}else alert('Nicht genug Ressourcen.')}
+function ship(){if(s.m>=2000&&s.c>=1000){s.m-=2000;s.c-=1000;alert('Kleiner Transporter in Auftrag gegeben.');render()}else alert('Nicht genug Ressourcen.')}
+function expo(){if(window.busy)return;window.busy=1;expo.disabled=true;expoStatus.textContent='läuft…';s.ex++;render();setTimeout(()=>{window.busy=0;expo.disabled=false;expoStatus.textContent='bereit';let r=Math.random();if(r<.35){let x=1000+Math.random()*9000|0;s.m+=x}else if(r<.65){let x=500+Math.random()*5000|0;s.c+=x}else if(r<.85){let x=250+Math.random()*3000|0;s.d+=x}else{s.sh+=1+Math.random()*40|0}render()},15000)}
+setInterval(()=>{s.m+=30/3600;s.c+=20/3600;s.d+=10/3600;let now=new Date();clock.textContent=now.toLocaleString('de-DE');serverTime.textContent=now.toLocaleTimeString('de-DE');render()},1000);render();
+</script></body></html>
