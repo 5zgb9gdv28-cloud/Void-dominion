@@ -27,4 +27,92 @@ table{width:100%;border-spacing:1px;background:#08131a}th,td{padding:6px;backgro
 <div id="layout"><div><div class="panel menu"><div class="pt">Direktiven</div><a class="" href="index.html">Übersicht</a><a class="" href="resources.html">Rohstoffe</a><a class="" href="buildings.html">Gebäude</a><a class="" href="merchant.html">Händler</a><a class="" href="research.html">Forschung</a><a class="" href="shipyard.html">Werft</a><a class="" href="defense.html">Verteidigung</a><a class="" href="fleet.html">Flotte</a><a class="" href="galaxy.html">Galaxie</a><a class="" href="imperium.html">Imperium</a><a class="" href="alliance.html">Allianz</a><a class="" href="battle.html">Kampfsimulator</a><a class="" href="expedition.html">Expeditionen</a><a class="" href="shop.html">Shop</a></div><div class="panel"><div class="pt">Server</div><div class="body">Speed: <b>3×</b><br>Expo: <b>+40%</b><br>Testmodus aktiv</div></div></div>
 <div id="content"><div class="title">Flotte – Germany</div><div class="panel"><div class="pt">Flottendetails</div><table><tr><th>Schiff</th><th>Anzahl</th></tr><tr><td>Leichter Jäger</td><td>11,259,501</td></tr><tr><td>Schwerer Jäger</td><td>927,273</td></tr><tr><td>Kreuzer</td><td>339,482</td></tr><tr><td>Schlachtschiff</td><td>401,704</td></tr><tr><td>Schlachtkreuzer</td><td>635,466</td></tr><tr><td>Bomber</td><td>140,149</td></tr><tr><td>Zerstörer</td><td>104,506</td></tr><tr><td>Reaper</td><td>68,850</td></tr><tr><td>Spionagesonde</td><td>1,223,070</td></tr><tr><td>Kleiner Transporter</td><td>2,345,815</td></tr></table></div><div class="panel"><div class="pt">Flottenversand</div><div class="body">Ziel <b>1:105:9</b> · Mission <b>Expedition</b> <a href="expedition.html"><button>Weiter</button></a></div></div></div>
 <div id="right"><div class="panel"><div class="pt">15 / 16 Planeten</div><a class="row" href="index.html"><div class="pic"></div><div><div class="pname">Germany</div><div class="coords">[1:105:6]</div></div></a><a class="row" href="index.html"><div class="pic"></div><div><div class="pname">Colony</div><div class="coords">[1:105:7]</div></div></a><a class="row" href="index.html"><div class="pic"></div><div><div class="pname">Colony</div><div class="coords">[1:105:8]</div></div></a><a class="row" href="index.html"><div class="pic"></div><div><div class="pname">Colony</div><div class="coords">[1:105:9]</div></div></a><a class="row" href="index.html"><div class="pic"></div><div><div class="pname">Colony</div><div class="coords">[1:105:10]</div></div></a><a class="row" href="index.html"><div class="pic"></div><div><div class="pname">Colony</div><div class="coords">[1:105:11]</div></div></a><a class="row" href="index.html"><div class="pic"></div><div><div class="pname">Colony</div><div class="coords">[1:105:12]</div></div></a><a class="row" href="index.html"><div class="pic"></div><div><div class="pname">Colony</div><div class="coords">[1:105:13]</div></div></a><a class="row" href="index.html"><div class="pic"></div><div><div class="pname">Colony</div><div class="coords">[1:105:14]</div></div></a><a class="row" href="index.html"><div class="pic"></div><div><div class="pname">Colony</div><div class="coords">[1:105:15]</div></div></a><a class="row" href="index.html"><div class="pic"></div><div><div class="pname">Colony</div><div class="coords">[1:105:16]</div></div></a><a class="row" href="index.html"><div class="pic"></div><div><div class="pname">Colony</div><div class="coords">[1:105:17]</div></div></a><a class="row" href="index.html"><div class="pic"></div><div><div class="pname">Colony</div><div class="coords">[1:105:18]</div></div></a><a class="row" href="index.html"><div class="pic"></div><div><div class="pname">Colony</div><div class="coords">[1:105:19]</div></div></a><a class="row" href="index.html"><div class="pic"></div><div><div class="pname">Colony</div><div class="coords">[1:105:20]</div></div></a></div><div class="panel"><div class="pt">Missionen</div><div class="body">Expeditionen: <b>0</b><br><br><a href="expedition.html"><button>Expedition</button></a></div></div></div></div>
-<div id="footer">Void Dominion · Classic Testserver · eigener Code · Update 0.9</div></div></body></html>
+<div id="footer">Void Dominion · Classic Testserver · eigener Code · Update 0.9</div></div>
+<script>
+(function(){
+"use strict";
+const KEY="voidDominionV10";
+const defaults={
+ metal:149237000000, crystal:96551000000, deut:50506000000, dm:540774,
+ points:727101073, last:Date.now(), fleet:{
+ "Leichter Jäger":11259501,"Schwerer Jäger":927273,"Kreuzer":339482,
+ "Schlachtschiff":401704,"Schlachtkreuzer":635466,"Bomber":140149,
+ "Zerstörer":104506,"Reaper":68850,"Spionagesonde":1223070,
+ "Kleiner Transporter":2345815,"Großer Transporter":126465,"Pathfinder":254750
+ },
+ expo:{total:200,metal:302694000000,crystal:195735000000,deut:103140000000,dm:1084698,ships:53013363,empty:638},
+ buildings:{Metallmine:42,Kristallmine:37,Deuteriumsynthesizer:39,Solarkraftwerk:20,Metallspeicher:21,Kristallspeicher:18,Deuteriumtank:18,Roboterfabrik:21,Raumschiffwerft:18},
+ research:{Energietechnik:2,Computertechnik:3,Waffentechnik:5,Schildtechnik:4,Raumschiffpanzerung:4,Verbrennungstriebwerk:6,Impulstriebwerk:5,Hyperraumantrieb:3,Astrophysik:4},
+ messages:[]
+};
+let S;
+try{S=JSON.parse(localStorage.getItem(KEY))||defaults}catch(e){S=defaults}
+S={...defaults,...S,fleet:{...defaults.fleet,...(S.fleet||{})},buildings:{...defaults.buildings,...(S.buildings||{})},research:{...defaults.research,...(S.research||{})},expo:{...defaults.expo,...(S.expo||{})},messages:S.messages||[]};
+
+function save(){S.last=Date.now();localStorage.setItem(KEY,JSON.stringify(S))}
+function fmt(n){return Math.floor(n).toLocaleString("de-DE")}
+function bn(n){return (n/1e9).toFixed(3)+" Bn"}
+function el(q){return document.getElementById(q)}
+function toast(t){let x=document.getElementById("vd-toast");if(!x){x=document.createElement("div");x.id="vd-toast";x.style="position:fixed;left:50%;bottom:25px;transform:translateX(-50%);padding:11px 18px;background:#07151c;border:1px solid #5a7785;color:#e8f0f3;z-index:9999;box-shadow:0 4px 18px #000";document.body.appendChild(x)}x.textContent=t;x.style.display="block";clearTimeout(window._vdto);window._vdto=setTimeout(()=>x.style.display="none",2200)}
+function resourceTick(){
+ let sec=Math.max(0,Math.min(86400,(Date.now()-S.last)/1000));
+ S.metal+=12400000/3600*sec; S.crystal+=7200000/3600*sec; S.deut+=3100000/3600*sec;
+ save();
+}
+function top(){
+ let map={metal:S.metal,crystal:S.crystal,deut:S.deut,dm:S.dm};
+ document.querySelectorAll(".r b").forEach((e,i)=>e.textContent=[bn(map.metal),bn(map.crystal),bn(map.deut),fmt(map.dm)][i]||e.textContent);
+}
+function addMsg(type,text){S.messages.unshift({time:new Date().toLocaleString("de-DE"),type,text});S.messages=S.messages.slice(0,50)}
+function spend(cost){if(S.metal<cost)return false;S.metal-=cost;return true}
+function bind(){
+ // Buildings
+ document.querySelectorAll("[data-build]").forEach(b=>b.onclick=()=>{
+   let n=b.dataset.build, cost=100000*Math.pow(1.5,S.buildings[n]||1);
+   if(!spend(cost)) return toast("Nicht genug Metall.");
+   S.buildings[n]=(S.buildings[n]||0)+1; S.points+=100;
+   addMsg("Gebäude",n+" auf Stufe "+S.buildings[n]+" ausgebaut.");
+   save(); top(); toast(n+" → Stufe "+S.buildings[n]);
+   setTimeout(()=>location.reload(),250);
+ });
+ // Research
+ document.querySelectorAll("[data-research]").forEach(b=>b.onclick=()=>{
+   let n=b.dataset.research,cost=250000;
+   if(!spend(cost)) return toast("Nicht genug Metall.");
+   S.research[n]=(S.research[n]||0)+1;S.points+=250;
+   addMsg("Forschung",n+" auf Stufe "+S.research[n]+" abgeschlossen.");
+   save();top();toast(n+" → Stufe "+S.research[n]);
+   setTimeout(()=>location.reload(),250);
+ });
+ // Ships
+ document.querySelectorAll("[data-ship]").forEach(b=>b.onclick=()=>{
+   let n=b.dataset.ship,q=Number(b.dataset.qty||1),cost=10000*q;
+   if(!spend(cost)) return toast("Nicht genug Metall.");
+   S.fleet[n]=(S.fleet[n]||0)+q;S.points+=q;
+   addMsg("Werft",q+"× "+n+" gebaut.");
+   save();top();toast(q+"× "+n+" gebaut");setTimeout(()=>location.reload(),250);
+ });
+ // Galaxy attacks
+ document.querySelectorAll("[data-attack]").forEach(b=>b.onclick=()=>{
+   let target=b.dataset.attack,loot=Math.floor(500000+Math.random()*8500000);
+   S.metal+=loot;S.points+=Math.floor(loot/100000);addMsg("Kampf","Sieg gegen "+target+" · Beute "+fmt(loot)+" Metall");
+   save();top();toast("Sieg! +"+fmt(loot)+" Metall");setTimeout(()=>location.reload(),250);
+ });
+ // Expo
+ document.querySelectorAll("[data-expo]").forEach(b=>b.onclick=()=>{
+   let n=Number(b.dataset.expo||1), ship="Kleiner Transporter";
+   if((S.fleet[ship]||0)<n)return toast("Nicht genug Kleine Transporter.");
+   S.fleet[ship]-=n;S.expo.total++;
+   let r=Math.random(),boost=1.4,m=0,msg="";
+   if(r<.28){m=Math.floor((100000000+Math.random()*700000000)*boost);S.metal+=m;S.expo.metal+=m;msg="Metallfund "+bn(m)}
+   else if(r<.48){m=Math.floor((70000000+Math.random()*400000000)*boost);S.crystal+=m;S.expo.crystal+=m;msg="Kristallfund "+bn(m)}
+   else if(r<.65){m=Math.floor((30000000+Math.random()*200000000)*boost);S.deut+=m;S.expo.deut+=m;msg="Deuteriumfund "+bn(m)}
+   else if(r<.80){m=Math.floor(1000+Math.random()*9000);S.dm+=m;S.expo.dm+=m;msg="Dunkle Materie "+fmt(m)}
+   else if(r<.91){let names=Object.keys(S.fleet),n2=names[Math.floor(Math.random()*names.length)],q=Math.floor(500+Math.random()*10000);S.fleet[n2]+=q;S.expo.ships+=q;msg="Schiffsfund "+fmt(q)+"× "+n2}
+   else{S.expo.empty++;msg="Expedition ohne Fund"}
+   addMsg("Expedition",msg);save();top();toast(msg);setTimeout(()=>location.reload(),250);
+ });
+}
+resourceTick(); top(); bind();
+})();
+</script></body></html>
